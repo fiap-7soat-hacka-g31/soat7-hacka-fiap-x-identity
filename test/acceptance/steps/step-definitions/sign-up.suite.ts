@@ -1,6 +1,7 @@
 import { And, Given, Suite, Then, When } from '@fiap-x/acceptance-factory';
 import { HttpService } from '@nestjs/axios';
 import { strict as assert } from 'assert';
+import { randomUUID } from 'crypto';
 
 @Suite()
 export class SignUpSuite {
@@ -14,7 +15,7 @@ export class SignUpSuite {
   async userInfoForRegistration() {
     this.userInfo = {
       name: 'Jack Sparrow',
-      email: 'jack@sparrow.com',
+      email: `${randomUUID().split('-').at(0)}jack@sparrow.com`,
       password: 'j@cK!123',
     };
   }
