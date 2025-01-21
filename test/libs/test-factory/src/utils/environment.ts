@@ -11,11 +11,6 @@ export const environment = {
   NODE_ENV: 'testing',
   MONGO_URL: `mongodb://${basicBearer}@${mongodbHost}:27017/${virtualEnvironment}?authSource=admin`,
   AMQP_URL: `amqp://${basicBearer}@${rabbitmqHost}:5672/${virtualEnvironment}`,
-  AWS_ACCESS_KEY_ID: 'test',
-  AWS_SECRET_ACCESS_KEY: 'test',
-  AWS_SESSION_TOKEN: '',
-  AWS_REGION: 'us-east-1',
-  AWS_S3_BUCKET_NAME: 'fiap7soat-f5-hacka-tests',
-  AWS_S3_LOCALSTACK_ENDPOINT: 'http://localhost:4566',
-  AWS_S3_USE_LOCALSTACK: 'true',
+  JWT_SIGNING_SECRET: 'supersecret',
+  JWT_EXPIRES_IN: '900s',
 };
