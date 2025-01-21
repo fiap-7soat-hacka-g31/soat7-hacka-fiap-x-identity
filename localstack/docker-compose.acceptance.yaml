@@ -17,7 +17,7 @@ services:
       TRAFFIC_INSPECTION_HTTP: 'all' # inbound|outbound|all|none
       TRAFFIC_INSPECTION_AMQP: 'all' # inbound|outbound|all|none
       ROUTE_PREFIX: ''
-      MONGO_URL: 'mongodb://fiapx:fiapx@mongodb:27017/fiapxPayments?authSource=admin'
+      MONGO_URL: 'mongodb://fiapx:fiapx@mongodb:27017/FiapXIdentity?authSource=admin'
       AMQP_URL: 'amqp://fiapx:fiapx@rabbitmq:5672'
       AWS_ACCESS_KEY_ID: 'test'
       AWS_SECRET_ACCESS_KEY: 'test'
