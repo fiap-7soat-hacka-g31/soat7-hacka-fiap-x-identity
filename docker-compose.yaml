@@ -1,0 +1,48 @@
+services:
+  aws_s3:
+    image: localstack/localstack:s3-latest
+    container_name: fiapx-aws-s3
+    ports:
+      - 4566:4566
+    volumes:
+      - ./localstack/init-s3.py:/etc/localstack/init/ready.d/init-s3.py
+  mongodb:
+    image: fiapx/mongodbrs:6
+    build:
+      context: ./localstack
+      dockerfile: ./Dockerfile.mongodb
+    container_name: fiapx-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: 'fiapx'
+      MONGO_INITDB_ROOT_PASSWORD: 'fiapx'
+    command: 'mongod --replSet rs0 --keyFile /opt/.keyfile/keyfile --bind_ip_all'
+    ports:
+      - 27017:27017
+  mongodb_init:
+    image: mongo:6
+    container_name: fiapx-mongodb-init
+    restart: 'on-failure'
+    depends_on: [mongodb]
+    command: >-
+      sh -c "sleep 10 && mongosh -u fiapx -p fiapx --host mongodb:27017 --eval 'rs.initiate({
+        \"_id\":\"rs0\",
+        "members":[
+          {
+            \"_id\": 0,
+            \"host\":\"localhost:27017\",
+          }
+        ]
+      })' && if [ $(mongosh -u fiapx -p fiapx --quiet --host mongodb:27017 --eval 'rs.status().ok') -eq 1 ]; then exit 0; else exit 1; fi"
+  rabbitmq:
+    image: fiapx/rabbitmq:3-management-delayed
+    build:
+      context: ./localstack
+      dockerfile: ./Dockerfile.rabbitmq
+    container_name: fiapx-rabbitmq
+    hostname: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: 'fiapx'
+      RABBITMQ_DEFAULT_PASS: 'fiapx'
+    ports:
+      - 5672:5672
+      - 15672:15672
