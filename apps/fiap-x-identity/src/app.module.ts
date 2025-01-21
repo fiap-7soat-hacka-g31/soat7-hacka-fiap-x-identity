@@ -9,10 +9,10 @@ import {
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { UserModule } from './auth/user.module';
 import { AmqpConfig } from './config/amqp.config';
 import { AppConfig } from './config/app.config';
 import { MongooseConfig } from './config/mongoose.config';
-import { VideoModule } from './video/video.module';
 
 @Module({
   imports: [
@@ -26,7 +26,7 @@ import { VideoModule } from './video/video.module';
     MongooseTacticalDesignModule,
     AmqpTacticalDesignModule,
     MongooseTransactionalModule,
-    VideoModule,
+    UserModule,
   ],
 })
 export class AppModule {}

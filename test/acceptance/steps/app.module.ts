@@ -1,8 +1,8 @@
 import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
-import { VideoSuite } from './step-definitions/video.suite';
+import { SignUpSuite } from './step-definitions/sign-up.suite';
 @Module({
   imports: [HttpModule],
-  providers: [VideoSuite],
+  providers: [SignUpSuite],
 })
 export class AppModule {}
