@@ -1,6 +1,6 @@
 services:
   fiap-x-identity:
-    image: fiapx/api:latest
+    image: fiapx/identity:latest
     build:
       context: ..
       args:
@@ -17,15 +17,10 @@ services:
       TRAFFIC_INSPECTION_HTTP: 'all' # inbound|outbound|all|none
       TRAFFIC_INSPECTION_AMQP: 'all' # inbound|outbound|all|none
       ROUTE_PREFIX: ''
-      MONGO_URL: 'mongodb://fiapx:fiapx@mongodb:27017/fiapxPayments?authSource=admin'
+      MONGO_URL: 'mongodb://fiapx:fiapx@mongodb:27017/FiapXIdentity?authSource=admin'
       AMQP_URL: 'amqp://fiapx:fiapx@rabbitmq:5672'
-      AWS_ACCESS_KEY_ID: 'test'
-      AWS_SECRET_ACCESS_KEY: 'test'
-      AWS_SESSION_TOKEN: ''
-      AWS_REGION: 'us-east-1'
-      AWS_S3_BUCKET_NAME: 'fiap7soat-f5-hacka-tests'
-      AWS_S3_LOCALSTACK_ENDPOINT: 'http://aws_s3:4566'
-      AWS_S3_USE_LOCALSTACK: 'true'
+      JWT_SIGNING_SECRET: 'supersecret'
+      JWT_EXPIRES_IN: '900s'
     command: sh -c "sleep 10 && npm run start:prod"
     ports:
       - 4000:3000
