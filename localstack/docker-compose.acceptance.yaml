@@ -8,8 +8,8 @@ services:
     restart: 'on-failure'
     environment:
       NODE_ENV: 'development'
-      APP_NAME: 'FiapXAPI'
-      APP_DESCRIPTION: 'API Component for Fiap X'
+      APP_NAME: 'FiapXIdentity'
+      APP_DESCRIPTION: 'Identity Component for Fiap X'
       APP_VERSION: '1.0.0'
       PORT: '3000'
       LOG_LEVEL: 'debug'
