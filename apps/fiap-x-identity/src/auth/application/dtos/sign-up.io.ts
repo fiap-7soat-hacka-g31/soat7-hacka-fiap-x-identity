@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsEmail,
   IsString,
@@ -7,13 +8,16 @@ import {
 import { AccessToken } from './token.dto';
 
 export class SignUpInput {
+  @ApiProperty()
   @IsString()
   @MinLength(3)
   name: string;
 
+  @ApiProperty()
   @IsEmail()
   email: string;
 
+  @ApiProperty()
   @IsStrongPassword({
     minLength: 8,
     minUppercase: 1,
