@@ -45,6 +45,8 @@ spec:
               value: "dev/identity"
             - name: JWT_EXPIRES_IN
               value: "900s"
+            - name: BASE_URL_IDENTITY_SERVICE
+              value: "http://fiap-x-identity-lb-srv:3000/dev/identity"
           ports:
             - name: http
               containerPort: 3000
